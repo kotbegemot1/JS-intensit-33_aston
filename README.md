@@ -4,13 +4,8 @@
 
 ## lesson 1. Основы git
 
-![Иллюстрация к проекту](https://github.com/kotbegemot1/JS-intensit-33_aston/blob/main/images/1big.png)
+Домашнее задание к первому уроку:
 
-`/components` — папка с React-компонентами  
-`/images` — папка с изображениями  
-`/vendor` — папка для кода или файлов сторонних разработчиков  
-  
-Остальные директории вспомогательные, создаются при необходимости разработчиком
-
-## Запуск проекта
+![Первый скриншот](https://github.com/kotbegemot1/JS-intensit-33_aston/blob/main/images/1big.png)
+![Первый скриншот](https://github.com/kotbegemot1/JS-intensit-33_aston/blob/main/images/2big.png)
 
