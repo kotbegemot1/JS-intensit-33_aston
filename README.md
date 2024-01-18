@@ -4,7 +4,7 @@
 
 ## lesson 1. Основы git
 
-![Иллюстрация к проекту](https://github.com/kotbegemot1/movies-explorer-frontend/blob/main/src/images/test_image.png)
+![Иллюстрация к проекту](https://github.com/kotbegemot1/JS-intensit-33_aston/blob/main/images/1big.png)
 
 `/components` — папка с React-компонентами  
 `/images` — папка с изображениями  
