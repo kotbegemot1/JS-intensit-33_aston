@@ -1,7 +1,5 @@
 # Интенсив по JS от aston
 
-
-
 ## lesson 1. Основы git
 
 Домашнее задание к первому уроку:
@@ -29,34 +27,54 @@
 3. AbortController — это класс, представленный в JavaScript, который позволяет управлять асинхронными операциями, такими как Fetch запросы, Promise, fs, setTimeout и setInterval. С его помощью можно прерывать выполнение асинхронных задач и предотвращать нежелательные побочные эффекты от выполнения задач, которые уже неактуальны. AbortController предоставляет надежный и стандартизированный механизм для управления асинхронными задачами. Он позволяет разработчикам контролировать выполнение асинхронных операций, предотвращать выполнение ненужных запросов и избегать утечек памяти.
 Он имеет единственный метод abort() и единственное свойство signal.
 
-4. string:  
-    `let single = 'single-quoted';  
-    let double = "double-quoted";  
-    let backticks = `backticks`;`  
+4. Cоздания примитивных значений: 
   
-  number:  
-    `let num = 2;
-    let num2 = Number(3);`  
+  - string:  
+```let single = 'single-quoted';```  
+```let double = "double-quoted";```  
+```let backticks = `backticks`;```
   
-  boolen:  
-    `let bool = true;  
-    let bool2 = Boolen(1);  
-    let bool3 = 3 > 4;`  
+  - string:
+
+    ```let num = 2;```  
+    ```let num2 = `Number(3)`;```
   
-  null:  
-    `let personObj = null;  
-    let element = document.querySelector('несуществующий класс');`  
+  - boolen:  
+    ```let bool = true;```  
+    ```let bool2 = Boolen(1);```  
+    ```let bool3 = 3 > 4;```  
   
-  undefined:  
-    `let name;
-    let und = (function asd(){})();`  
+  - null:  
+    ```let personObj = null;```  
+    ```let element = document.querySelector('несуществующий класс');```  
   
-  symbol:
-    `const sym = Symbol('dd');`  
+  - undefined:  
+    ```let name;```  
+    ```let und = (function asd(){})();```  
   
-  bigint:  
-    `const biggy = 9997000254740991n;  
-    const alsoBig = BigInt(9997000254999999);`  
+  - symbol:  
+    ```const sym = Symbol('dd');```  
+  
+  - bigint:  
+    ```const biggy = 9997000254740991n;```  
+    ```const alsoBig = BigInt(9997000254999999);```  
 
 5. const и let ограничены областью видимости блока и если мы попытаемся обратиться к этим переменным до их объявления, то получим ReferenceError.
 Объект ReferenceError представляет ошибку, возникающую при обращении к переменной, которая не существует (или не была инициализирована) в текущей области видимости.
+
+6. Примеры:  
+
+```
+const res = "B" + "a" + (1 - "hello");
+console.log(res); // "BaNaN"
+```
+
+```
+const res2 = (true && 3) + "d";
+console.log(res2); // "3d"
+```
+
+```
+const res3 = Boolean(true && 3) + "d";
+console.log(res3); // "trued"
+```
