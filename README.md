@@ -78,3 +78,25 @@ console.log(res2); // "3d"
 const res3 = Boolean(true && 3) + "d";
 console.log(res3); // "trued"
 ```
+
+## lesson 3. Объекты и ффункции
+
+1. Способы создания объектов:  
+- 1 способ:  
+
+`const counter = { count: 0 }`
+
+- 2 cпособ:  
+
+```
+function Counter(count=0) {
+    this.count = count
+    return this
+}
+const counter = Counter()
+```
+- 3 способ:  
+
+`const counter3 = Object.assign({}, {count: 0})`
+
+2. Способы копирования объектов:
