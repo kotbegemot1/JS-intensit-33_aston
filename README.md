@@ -135,3 +135,11 @@ function makeCounter() {
 
 const increaseCounter = makeCounter();
 ```
+5. *Функция переворачивающая строку:  
+
+```
+function reverseStr(str) {
+    return str.split('').reverse().join('');
+}
+```
+
