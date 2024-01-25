@@ -99,4 +99,39 @@ const counter = Counter()
 
 `const counter3 = Object.assign({}, {count: 0})`
 
-2. Способы копирования объектов:
+2. Способы копирования объектов:  
+- 1 способ(structuredClone):  
+
+```const someArr = { 'a': 1, 'b':2 };
+const deepArr = structuredClone(someArr);
+```
+
+- 2 cпособ(lodash):  
+
+```
+import cloneDeep from 'lodash.clonedeep';
+const someArr = { 'a': 1, 'b':2 };
+const deepArr = cloneDeep(someArr)
+```
+
+- 3 способ(JSON.parse, JSON.stringify):  
+
+```
+const someArr = { 'a': 1, 'b':2 };
+const deep = JSON.parse(JSON.stringify(itemsInCart));
+```
+3. Создать функцию makeCounter:  
+- 1 способ(через замыкание):
+
+```
+function makeCounter() {
+    let counter = 0;
+    function increaseCounter() {
+        counter += 1;
+        console.log(counter);
+    }
+    return increaseCounter
+}
+
+const increaseCounter = makeCounter();
+```
