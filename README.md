@@ -78,3 +78,156 @@ console.log(res2); // "3d"
 const res3 = Boolean(true && 3) + "d";
 console.log(res3); // "trued"
 ```
+
+## lesson 3. Объекты и ффункции
+
+1. Способы создания объектов:  
+- 1 способ:  
+
+`const counter = { count: 0 }`
+
+- 2 cпособ:  
+
+```
+function Counter(count=0) {
+    this.count = count
+    return this
+}
+const counter = Counter()
+```
+- 3 способ:  
+
+`const counter3 = Object.assign({}, {count: 0})`
+
+2. Способы копирования объектов:  
+- 1 способ(structuredClone):  
+
+```const someArr = { 'a': 1, 'b':2 };
+const deepArr = structuredClone(someArr);
+```
+
+- 2 cпособ(lodash):  
+
+```
+import cloneDeep from 'lodash.clonedeep';
+const someArr = { 'a': 1, 'b':2 };
+const deepArr = cloneDeep(someArr)
+```
+
+- 3 способ(JSON.parse, JSON.stringify):  
+
+```
+const someArr = { 'a': 1, 'b':2 };
+const deep = JSON.parse(JSON.stringify(itemsInCart));
+```
+3. Создать функцию makeCounter:  
+- 1 способ(function declaration):
+
+```
+function makeCounter() {
+    let counter = 0;
+    function increaseCounter() {
+        counter += 1;
+        console.log(counter);
+    }
+    return increaseCounter
+}
+
+const increaseCounter = makeCounter();
+```
+
+- 2 способ(function expression):
+
+```
+const makeCounter = function(count) {
+  let counter = 0;
+  counter += count;
+  return counter
+}
+```
+
+- 3 способ(named function expression):
+
+```
+const makeCounter = function counter(count) {
+  let counter = 0;
+  counter += count;
+  return counter
+}
+```
+
+- 4 способ(arrow function):
+
+```
+const makeCounter = (count) => {
+  let counter = 0;
+  counter += count;
+  return counter
+}
+```
+
+- 5 способ(anonymous function):
+
+```
+const makeCounter = function(count) {
+  let counter = 0;
+  counter += count;
+  return counter
+}
+```
+
+4. *Функция глубокого сравнения:
+
+```
+const obj1 = { 
+  here: { 
+    is: "on", 
+    other: "3" 
+    },
+  object: "Y"
+  };
+
+const obj2 = { 
+  here: { 
+    is: "on", 
+    other: "2" 
+    }, 
+  object: "Y" 
+  };
+
+const deepEqual = (object1, object2) => {
+
+  const objKeys1 = Object.keys(object1);
+  const objKeys2 = Object.keys(object2);
+
+  if (objKeys1.length !== objKeys2.length) return false;
+
+  for (let key of objKeys1) {
+    const value1 = object1[key];
+    const value2 = object2[key];
+
+    const isObjects = isObject(value1) && isObject(value2);
+
+    if ((isObjects && !deepEqual(value1, value2)) ||
+      (!isObjects && value1 !== value2)
+    ) {
+      return false;
+    }
+  }
+  return true;
+};
+
+const isObject = (object) => {
+  return object != null && typeof object === "object";
+};
+
+console.log(deepEqual(obj1, obj2)) //false
+```
+
+5. *Функция переворачивающая строку:  
+
+```
+function reverseStr(str) {
+    return str.split('').reverse().join('');
+}
+```
