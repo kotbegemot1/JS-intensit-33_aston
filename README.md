@@ -231,3 +231,52 @@ function reverseStr(str) {
     return str.split('').reverse().join('');
 }
 ```
+## lesson 4. Контекст и струкуры данных
+
+1. В js массив является "неправильным", потому что в js (динамический язык программирования) - массиву не нужно
+задавать длину и не нужно указывать тип данных. Так как массив наследует от object он может иметь функционал хэш-таблиц, 
+также методы массива позволяют использовать массив как такие структуры данных как стек и очередь.
+
+2. Привязать контекст:
+
+```
+function logger() {
+    console.log(`I output only external context: ${this.item}`);
+}
+
+const obj = { item: "some value" };
+
+console.log(logger.call(obj))
+console.log(logger.apply(obj))
+console.log(logger.bind(obj)())
+```
+3. Бонус. Полифил метода bind():
+
+```
+if (!Function.prototype.bind) {
+  Function.prototype.bind = function (oThis) {
+    if (typeof this !== "function") {
+      // ближайший аналог внутренней функции
+      // IsCallable в ECMAScript 5
+      throw new TypeError(
+        "Function.prototype.bind - what is trying to be bound is not callable",
+      );
+    }
+
+    var aArgs = Array.prototype.slice.call(arguments, 1),
+      fToBind = this,
+      fNOP = function () {},
+      fBound = function () {
+        return fToBind.apply(
+          this instanceof fNOP && oThis ? this : oThis,
+          aArgs.concat(Array.prototype.slice.call(arguments)),
+        );
+      };
+
+    fNOP.prototype = this.prototype;
+    fBound.prototype = new fNOP();
+
+    return fBound;
+  };
+}
+```
