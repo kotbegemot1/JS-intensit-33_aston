@@ -280,3 +280,137 @@ if (!Function.prototype.bind) {
   };
 }
 ```
+
+## lesson 5. Сложность алгоритмов, ООП
+
+1. Какие бывают алгоритмы сортировок  
+
+- Пузырьковая сортировка и её улучшения
+
+| Сортировка     | худшее   | среднее  | лучшее |
+| -----------    |:--------:| :------: | -----: |
+| пузырьком      | O($n^2$) | O($n^2$) | O(n)   |
+| перемешиванием | O($n^2$) | O($n^2$) | O(n)   |
+| расчёской      | O($n^2$) | O($n^2$/2^p) | O(n log n)  |
+
+- Простые сортировки  
+
+| Сортировка     | худшее   | среднее  | лучшее |
+| -----------    |:--------:| :------: | -----: |
+| вставками      | O($n^2$) | O($n^2$) | O(n)   |
+| выбором        | O($n^2$) | O($n^2$) | O($n^2$)  |
+
+- Эффективные сортировки  
+
+| Сортировка     | худшее   | среднее  | лучшее |
+| -----------    |:--------:| :------: | -----: |
+| быстрая        | O($n^2$) | O(n log n) | O(n)   |
+| слиянием       | O(n log n) | O(n log n) | O(n log n)  |
+| пирамидельная  | O(n log n) | O(n log n) | O(n log n)  |
+
+2. Устное задание.
+3. Создать объект Person несколькими способами, после создать объект Person2, чтобы в нём были доступны методы объекта 
+Person. Добавить метод logInfo чтоб он был доступен всем объектам.  
+
+```
+// Создание объекта Person (способ 1)
+const person1 = {
+  name: "Petr",
+  sayHello: function () {
+    console.log(`Hello, my name is ${this.name}!`);
+  },
+};
+
+// Создание объекта Person (способ 2: через конструктор)
+function Person(name) {
+  this.name = name;
+}
+
+Person.prototype.sayHello = function () {
+  console.log(`Hello, my name is ${this.name}!`);
+};
+
+// Создание объекта Person2 с доступом к методам объекта Person
+const person2 = new Person("John");
+
+// Добавление метода logInfo
+Person.prototype.logInfo = function () {
+  console.log(`Logging info ${this.name}`);
+};
+```
+
+4. Создать класс PersonThree c get и set для поля name и конструктором, сделать класс наследник от класса Person.
+
+```
+class Person {
+  constructor(name) {
+    this._name = name;
+  }
+
+  get name() {
+    return this._name;
+  }
+
+  set name(newName) {
+    this._name = newName;
+  }
+}
+
+class PersonThree extends Person {
+  constructor(name) {
+    super(name);
+  }
+
+}
+
+const person = new Person("John");
+console.log(person.name); // Получение значения поля name с использованием геттера
+person.name = "Petr"; // Установка нового значения поля name с использованием сеттера
+console.log(person.name); // Получение обновленного значения поля name
+```
+
+- БОНУС: 
+1. Написать функцию, которая вернет массив с первой парой чисел, сумма которых равна total:
+
+```
+arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+total = 13;
+
+function binarySearch(arr, item, last) {
+    let low = 0;
+    let high = last - 1;
+    
+    while (low <= high) {
+        let mid = Math.floor((low + high)/2);
+        let guess = arr[mid];
+        
+        if (guess == item) {
+            return mid
+        };
+        
+        if (guess > item) {
+            high = mid - 1;
+        } else {
+            low = mid + 1;
+        };
+    }
+    return null
+}
+
+const firstSum = (arr, total) => {
+    let last = arr[arr.length - 1];
+    if(last - total < 0) {
+        const first = binarySearch(arr, total - last, last)
+        return [arr[first], last]
+    } else {
+        const first = arr[0];
+        last = binarySearch(arr, total - first, last)
+        return [first, arr[last]]
+    }
+
+}
+
+console.log(firstSum(arr,total))
+```
+
+2. Сложность алгоритма из предидущего задания: O(log n)
