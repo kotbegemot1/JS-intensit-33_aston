@@ -413,4 +413,78 @@ const firstSum = (arr, total) => {
 console.log(firstSum(arr,total))
 ```
 
-2. Сложность алгоритма из предидущего задания: O(log n)
+2. Сложность алгоритма из предыдущего задания: O(log n)  
+
+## lesson 6. Фссинхронность в JS
+
+1. 
+
+```
+let promiseTwo = new Promise((resolve, reject) => {
+   resolve("a");
+});
+
+promiseTwo
+.then((res) => {
+   return res + "b";
+})
+.then((res) => {
+   return res + "с";
+})
+.finally((res) => {
+   return res + "!!!!!!!";
+})
+.catch((res) => {
+   return res + "d";
+})
+.then((res) => {
+   console.log(res);
+});
+
+// вывод: "abc"
+```
+
+2. 
+
+```
+function doSmth() {
+   return Promise.resolve("123");
+}
+
+doSmth()
+.then(function (a) {
+   console.log("1", a); //
+   return a;
+})
+.then(function (b) {
+   console.log("2", b);
+   return Promise.reject("321");
+})
+.catch(function (err) {
+   console.log("3", err);
+})
+.then(function (c) {
+   console.log("4", c);
+return c;
+});
+
+// вывод: 
+// 1 123
+// 2 123
+// 3 321
+// 4 undefined
+```
+
+3. 
+
+```
+const arr1 = [10, 12, 15, 21];
+
+const arrFilter = (arr) => {
+    arr.forEach((item, it)=>{
+        setTimeout(() => console.log(arr.indexOf(item)), 3000 * (it+0))
+    })
+}
+
+arrFilter(arr1);
+```
