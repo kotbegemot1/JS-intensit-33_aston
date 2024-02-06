@@ -488,3 +488,43 @@ const arrFilter = (arr) => {
 
 arrFilter(arr1);
 ```
+
+4. Top-level await (глобальный await) - это возможность использовать await на уровень выше, за пределами асинхронной 
+функции. Цель такого использования превращение ES-модулей в подобие асинхронных функций. Что позволяет модулям получать 
+готовые к использовнанию ресурсы и блокировать модулииЮ импортирующие их. Модули, которые импортируют ожидаемые ресурсы, 
+смогут запускать выполнение кода только после получения ресурсов и их предварительной подготовки к использованию. 
+Примеры как то такое осуществить:  
+- IIFE
+
+```
+//a.mjs
+import fetch  from "node-fetch";
+  export default (async () => {
+    const resp = await fetch('https://jsonplaceholder.typicode.com/users');
+    users = resp.json();
+  })();
+  export { users };
+
+//usingAwait.mjs
+import promise, {users} from './a.mjs';
+  promise.then(() => { 
+    console.log('In usingAwait module');
+    setTimeout(() => console.log('All users:', users), 100); //user list
+  });
+```
+
+- Top-level await
+
+```
+//a.mjs
+const resp = await fetch('https://jsonplaceholder.typicode.com/users');
+const users = resp.json();
+export { users};
+
+//usingAwait.mjs
+import {users} from './a.mjs';
+
+console.log(users);
+console.log('In usingAwait module');
+```
+
