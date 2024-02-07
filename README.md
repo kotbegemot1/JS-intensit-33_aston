@@ -413,4 +413,139 @@ const firstSum = (arr, total) => {
 console.log(firstSum(arr,total))
 ```
 
-2. Сложность алгоритма из предидущего задания: O(log n)
+2. Сложность алгоритма из предыдущего задания: O(log n)  
+
+## lesson 6. Фссинхронность в JS
+
+1. 
+
+```
+let promiseTwo = new Promise((resolve, reject) => {
+   resolve("a");
+});
+
+promiseTwo
+.then((res) => {
+   return res + "b";
+})
+.then((res) => {
+   return res + "с";
+})
+.finally((res) => {
+   return res + "!!!!!!!";
+})
+.catch((res) => {
+   return res + "d";
+})
+.then((res) => {
+   console.log(res);
+});
+
+// вывод: "abc"
+```
+
+2. 
+
+```
+function doSmth() {
+   return Promise.resolve("123");
+}
+
+doSmth()
+.then(function (a) {
+   console.log("1", a); //
+   return a;
+})
+.then(function (b) {
+   console.log("2", b);
+   return Promise.reject("321");
+})
+.catch(function (err) {
+   console.log("3", err);
+})
+.then(function (c) {
+   console.log("4", c);
+return c;
+});
+
+// вывод: 
+// 1 123
+// 2 123
+// 3 321
+// 4 undefined
+```
+
+3. 
+
+```
+const arr1 = [10, 12, 15, 21];
+
+const arrFilter = (arr) => {
+    arr.forEach((item, it)=>{
+        setTimeout(() => console.log(arr.indexOf(item)), 3000 * (it+0))
+    })
+}
+
+arrFilter(arr1);
+```
+
+4. Top-level await (глобальный await) - это возможность использовать await на уровень выше, за пределами асинхронной 
+функции. Цель такого использования превращение ES-модулей в подобие асинхронных функций. Что позволяет модулям получать 
+готовые к использовнанию ресурсы и блокировать модулииЮ импортирующие их. Модули, которые импортируют ожидаемые ресурсы, 
+смогут запускать выполнение кода только после получения ресурсов и их предварительной подготовки к использованию. 
+Примеры как то такое осуществить:  
+- IIFE
+
+```
+//a.mjs
+import fetch  from "node-fetch";
+  export default (async () => {
+    const resp = await fetch('https://jsonplaceholder.typicode.com/users');
+    users = resp.json();
+  })();
+  export { users };
+
+//usingAwait.mjs
+import promise, {users} from './a.mjs';
+  promise.then(() => { 
+    console.log('In usingAwait module');
+    setTimeout(() => console.log('All users:', users), 100); //user list
+  });
+```
+
+- Top-level await
+
+```
+//a.mjs
+const resp = await fetch('https://jsonplaceholder.typicode.com/users');
+const users = resp.json();
+export { users};
+
+//usingAwait.mjs
+import {users} from './a.mjs';
+
+console.log(users);
+console.log('In usingAwait module');
+```
+
+5. БОНУС ЗАДАНИЕ:  
+
+```
+function fetchUrl(url, repeat = 5) {
+    fetch(url)
+    .then(
+      function (value) {
+        return value.json();
+      },
+      function (reason) {
+        return repeat > 1
+            ? fetchUrl(url, repeat - 1)
+            : Promise.reject(reason);
+      }
+    )
+    .then(res => console.log(res))
+    .catch(err => console.error(err))
+}
+
+fetchUrl(url = 'https://google/com&#39')
+```
