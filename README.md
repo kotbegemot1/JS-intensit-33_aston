@@ -528,3 +528,24 @@ console.log(users);
 console.log('In usingAwait module');
 ```
 
+5. БОНУС ЗАДАНИЕ:  
+
+```
+function fetchUrl(url, repeat = 5) {
+    fetch(url)
+    .then(
+      function (value) {
+        return value.json();
+      },
+      function (reason) {
+        return repeat > 1
+            ? fetchUrl(url, repeat - 1)
+            : Promise.reject(reason);
+      }
+    )
+    .then(res => console.log(res))
+    .catch(err => console.error(err))
+}
+
+fetchUrl(url = 'https://google/com&#39')
+```
